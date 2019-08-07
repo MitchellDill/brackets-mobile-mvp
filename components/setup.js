@@ -5,9 +5,9 @@ import PropTypes from 'prop-types';
 const Setup = props => {
     return (
         <View style={styles.body}>
-            <Text style={styles.title}>{'['}brackets{']'}</Text>
-            <Text style={styles.question}>Who in it to win it?</Text>
-            <TextInput style={styles.field} editable={true} onChangeText={(text)=>{props.updateTextInput(text);}}>What game you playin?</TextInput>
+            <Text style={[styles.text, styles.title]}>{'['}brackets{']'}</Text>
+            <Text style={[styles.text, styles.question]}>Whatchu playin?</Text>
+            <TextInput style={[styles.text, styles.field]} editable={true} onChangeText={(text)=>{props.updateTextInput(text);}}>...</TextInput>
         </View>
     );
 };
@@ -26,24 +26,24 @@ const styles = StyleSheet.create({
       backgroundColor: 'purple',
       flex: 1,
     },
+    text: {
+        fontSize: 28,
+        color:'white',
+        textAlign: 'center',
+    },
     title: {
         flex: 3,
-        fontSize: 40,
+        fontSize: 42,
         fontWeight: '700',
-        textAlign: 'center',
         paddingTop: 5,
-        color:'white',
     },
     question: {
         flex: 2,
         fontSize: 30,
-        color: 'white',
-        textAlign: 'center',
+        fontWeight: '400',
     },
     field: {
         flex: 5,
-        fontSize: 28,
-        color: 'white',
-        textAlign: 'center',
+        backgroundColor: 'pink',
     },
 });

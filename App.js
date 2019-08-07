@@ -35,21 +35,29 @@ export default class App extends Component {
     });
   }
 
-  recordSetup(field) {
-
-  }
+  recordSetup(field) {}
 
   render() {
     return (
       <Fragment>
         <StatusBar barStyle="dark-content" />
         <SafeAreaView style={styles.safe}>
-          <Setup
-            game={this.state.game}
-            entrants={this.state.entrants}
-            totalEntrants={this.state.totalEntrants}
-            updateTextInput={this.updateTextInput}
-          />
+          {this.state.game &&
+          this.state.totalEntrants &&
+          this.state.entrants.length > 1 ? (
+            <Bracket
+              game={this.state.game}
+              entrants={this.state.entrants}
+              totalEntrants={this.state.totalEntrants}
+            />
+          ) : (
+            <Setup
+              game={this.state.game}
+              entrants={this.state.entrants}
+              totalEntrants={this.state.totalEntrants}
+              updateTextInput={this.updateTextInput}
+            />
+          )}
         </SafeAreaView>
       </Fragment>
     );
@@ -58,7 +66,6 @@ export default class App extends Component {
 
 const styles = StyleSheet.create({
   safe: {
-    backgroundColor: 'white',
     flex: 1,
   },
 });
