@@ -20,8 +20,23 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      exists: true,
+      game: '',
+      entrants: [{}],
+      totalEntrants: 0,
+      text: '',
     };
+    this.updateTextInput = this.updateTextInput.bind(this);
+  }
+
+  updateTextInput(updatedText) {
+    console.log(updatedText);
+    this.setState({
+      text: updatedText,
+    });
+  }
+
+  recordSetup(field) {
+
   }
 
   render() {
@@ -29,7 +44,12 @@ export default class App extends Component {
       <Fragment>
         <StatusBar barStyle="dark-content" />
         <SafeAreaView style={styles.safe}>
-          <Setup />
+          <Setup
+            game={this.state.game}
+            entrants={this.state.entrants}
+            totalEntrants={this.state.totalEntrants}
+            updateTextInput={this.updateTextInput}
+          />
         </SafeAreaView>
       </Fragment>
     );
@@ -38,7 +58,7 @@ export default class App extends Component {
 
 const styles = StyleSheet.create({
   safe: {
-    backgroundColor: 'purple',
+    backgroundColor: 'white',
     flex: 1,
   },
 });
