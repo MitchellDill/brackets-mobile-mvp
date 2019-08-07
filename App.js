@@ -28,7 +28,6 @@ export default class App extends Component {
     this.updateTextInput = this.updateTextInput.bind(this);
     this.Competitor = this.Competitor.bind(this);
     this.buildCompetitors = this.buildCompetitors.bind(this);
-    this.determineRoundsRequired = this.determineRoundsRequired.bind(this);
   }
 
   updateTextInput(updatedText) {
@@ -54,17 +53,7 @@ export default class App extends Component {
 
   buildBracket(totalEntrants) {
     const bracket = [];
-    const rounds = this.determineRoundsRequired(totalEntrants);
-  }
-
-  determineRoundsRequired(totalEntrants) {
-    for (let pow = 2; pow < 9; pow++) {
-      let expo = Math.pow(2, pow);
-      if (expo === totalEntrants) {
-        return pow + 1;
-      }
-    }
-    return 1;
+    const rounds = Math.log2(totalEntrants);
   }
 
   componentDidMount() {
