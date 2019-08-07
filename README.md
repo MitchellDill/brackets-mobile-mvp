@@ -8,9 +8,9 @@
 - Default to a double-knockout structure, with a loser's bracket
 - Scores of each match are recorded, with a default "Score" key
 - When a winner is selected, they advance in the tournament
-- Name and game are entered for each tournmanet and used to track it
+- Name and game are entered for each tournament and used to track it
 - Multiple tournaments may be ongoing at any given time, and are selectable from the main app landing page
-- Handle odd number of competitors with false "bye" competitor inserted into the bracket
+- Handle non-power-of-2 number of competitors with false "bye" competitor inserted into the bracket
 
 # Stretch Goals
 
