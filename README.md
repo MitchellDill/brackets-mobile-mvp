@@ -10,6 +10,7 @@
 - When a winner is selected, they advance in the tournament
 - Name and game are entered for each tournmanet and used to track it
 - Multiple tournaments may be ongoing at any given time, and are selectable from the main app landing page
+- Handle odd number of competitors with false "bye" competitor inserted into the bracket
 
 # Stretch Goals
 

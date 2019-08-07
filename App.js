@@ -3,7 +3,7 @@
  * @flow
  */
 
-import React, { Component, Fragment } from 'react';
+import React, {Component, Fragment} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -13,31 +13,32 @@ import {
   StatusBar,
 } from 'react-native';
 
+import Setup from './components/setup.js';
 import Bracket from './components/bracket.js';
 
 export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      exists: true
-    }
+      exists: true,
+    };
   }
 
   render() {
     return (
       <Fragment>
         <StatusBar barStyle="dark-content" />
-        <SafeAreaView>
-      <Bracket />
+        <SafeAreaView style={styles.safe}>
+          <Setup />
         </SafeAreaView>
       </Fragment>
     );
-
   }
-};
+}
 
 const styles = StyleSheet.create({
-  body: {
-    backgroundColor: 'yellow',
+  safe: {
+    backgroundColor: 'purple',
+    flex: 1,
   },
 });
