@@ -23,11 +23,13 @@ export default class App extends Component {
       game: '',
       entrants: [{}],
       totalEntrants: 0,
+      bracket: [],
       text: '',
     };
     this.updateTextInput = this.updateTextInput.bind(this);
     this.Competitor = this.Competitor.bind(this);
     this.buildCompetitors = this.buildCompetitors.bind(this);
+    this.buildBracket = this.buildBracket.bind(this);
   }
 
   updateTextInput(updatedText) {
@@ -53,15 +55,58 @@ export default class App extends Component {
 
   buildBracket(totalEntrants) {
     const bracket = [];
-    const rounds = Math.log2(totalEntrants);
+    let rounds = Math.log2(totalEntrants);
+    let entrants = this.state.entrants.slice();
+
+    const seedBracket = competitors => {
+      const round = [];
+      const seedsArray = competitors.map(competitor => competitor.seed);
+      console.log('the seeds array says: ', seedsArray);
+      for (let i = 0; i < totalEntrants; i += 2) {
+        const highSeed = Math.max(...seedsArray);
+        const lowSeed = Math.min(...seedsArray);
+        console.log('high seed is ', highSeed, ' and low seed is ', lowSeed);
+        const match = competitors.filter(competitor => {
+          return competitor.seed === highSeed || competitor.seed === lowSeed;
+        });
+        competitors = entrants.filter(competitor => {
+          return competitor.seed !== highSeed || competitor.seed !== lowSeed;
+        });
+        console.log('the match should be: ', match);
+        console.log(
+          'and now the remaining entrants to seed are: ',
+          competitors,
+        );
+        round.push(match);
+      }
+      bracket.push(round);
+    };
+
+    for (let i = 0; i < rounds; i++) {
+      let round;
+      if (i === 0) {
+        round = seedBracket(entrants);
+      } else {
+        round = seedBracket(
+          new Array(totalEntrants / Math.pow(2, i)).fill(
+            this.Competitor('bobo', Math.floor(Math.random() * 128)),
+          ),
+        );
+      }
+      bracket.push(round);
+    }
+    console.log(bracket);
+    return bracket;
   }
 
   componentDidMount() {
     const competitors = this.buildCompetitors(4);
+    const bracket = this.buildBracket(4);
     this.setState({
       game: 'Mario Kart 64',
       entrants: competitors,
       totalEntrants: 4,
+      bracket: bracket,
     });
   }
 
