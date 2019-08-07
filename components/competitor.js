@@ -1,9 +1,10 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import PropTypes from 'prop-types';
 
 const Competitor = props => {
     return (
-        <View><Text>hello baby</Text></View>
+        <View style={styles.body}><Text>BAD BOY</Text></View>
     );
 };
 
@@ -11,6 +12,7 @@ export default Competitor;
 
 const styles = StyleSheet.create({
     body: {
-      backgroundColor: 'yellow',
-    },
+        backgroundColor: 'purple',
+        flex: 1,
+      },
 });
