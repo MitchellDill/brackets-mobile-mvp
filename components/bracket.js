@@ -7,7 +7,7 @@ const Bracket = props => {
     return (
         <View style={styles.body}>
             <Text style={[styles.text, styles.title]}>{props.game}</Text>
-            <Round />
+            <Round entrants={props.entrants} />
         </View>
     );
 };

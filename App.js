@@ -26,12 +26,39 @@ export default class App extends Component {
       text: '',
     };
     this.updateTextInput = this.updateTextInput.bind(this);
+    this.Competitor = this.Competitor.bind(this);
+    this.buildCompetitors = this.buildCompetitors.bind(this);
   }
 
   updateTextInput(updatedText) {
     console.log(updatedText);
     this.setState({
       text: updatedText,
+    });
+  }
+
+  Competitor(name, seed) {
+    return {name, seed};
+  }
+
+  buildCompetitors(totalEntrants) {
+    const competitors = [];
+    const entrants = ['mitchell', 'jude law', 'ron weasley', 'mollie'];
+    for (let i = 0; i < totalEntrants; i++) {
+      const competitor = this.Competitor(entrants[i], i);
+      console.log(competitor);
+      competitors.push(competitor);
+      console.log(competitors);
+    }
+    return competitors;
+  }
+
+  componentDidMount() {
+    const competitors = this.buildCompetitors(4);
+    this.setState({
+      game: 'Mario Kart 64',
+      entrants: competitors,
+      totalEntrants: 4,
     });
   }
 

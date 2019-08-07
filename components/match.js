@@ -5,15 +5,32 @@ import Competitor from './competitor';
 
 const Match = props => {
     return (
-        <View style={styles.body}><Competitor /> vs. <Competitor /></View>
+        <View style={styles.body}>
+            <Competitor entrant={props.entrants[0]}/>
+                <Text style={[styles.text, styles.vs]}>VS.</Text>
+            <Competitor entrant={props.entrants[1]}/>
+        </View>
     );
 };
 
 export default Match;
+
+Match.propTypes = {
+    entrants: PropTypes.arrayOf(PropTypes.object),
+};
 
 const styles = StyleSheet.create({
     body: {
         backgroundColor: 'purple',
         flex: 1,
       },
+    text: {
+        fontSize: 28,
+        color:'white',
+        textAlign: 'center',
+    },
+    vs: {
+        fontSize: 36,
+        fontWeight: '500',
+    },
 });
