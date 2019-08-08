@@ -16,7 +16,6 @@ import {
 import Setup from './components/setup.js';
 import Bracket from './components/bracket.js';
 import Match from './components/match.js';
-import { throwStatement } from '@babel/types';
 
 export default class App extends Component {
   constructor(props) {
@@ -73,13 +72,21 @@ export default class App extends Component {
     });
   }
 
-  advanceWinner(winner) {
+  advanceWinner(winner, matchNo) {
+    let [round, match] = matchNo;
+    let corner = (match + 2) % 2;
+    let bracketUpdate = this.state.bracket.slice();
+    let nextMatch = bracketUpdate[round + 1][Math.floor(match / 2)];
+    nextMatch[corner] = winner;
+    winner.wins += 1;
+    this.setState({
+      bracket: bracketUpdate,
+    });
     this.goBack();
-    console.log('winner winner chicken dinner for ', winner.name);
   }
 
-  Competitor(name, seed) {
-    return {name, seed};
+  Competitor(name, seed, wins = 0) {
+    return {name, seed, wins};
   }
 
   buildCompetitors(totalEntrants) {
@@ -171,7 +178,7 @@ export default class App extends Component {
           ) : this.state.matchIsSelected === true ? (
             <Match
               selected={this.state.matchIsSelected}
-              roundAndMatchSelected={this.props.roundAndMatchSelected}
+              matchId={[this.state.roundSelected, this.state.matchSelected]}
               entrants={this.state.bracket[this.state.roundSelected][this.state.matchSelected]}
               askWinner={this.askWinner}
               advanceWinner={this.advanceWinner}

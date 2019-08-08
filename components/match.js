@@ -32,11 +32,11 @@ const Match = props => {
                                     <Button title="[ <-- ]" color="yellow" onPress={props.goBack} />
                                 </View>
                                 <View style={styles.modalCompetitors}>
-                                <Button title={props.entrants[0].name} color="pink" onPress={(winner) => {
-                                    props.advanceWinner(props.entrants[0])}}/>
+                                <Button title={props.entrants[0].name} color="pink" onPress={() => {
+                                    props.advanceWinner(props.entrants[0], props.matchId)}}/>
                                 <Text style={[styles.text, styles.vs]}>VS</Text>
-                                <Button title={props.entrants[1].name} color="pink" onPress={(winner) => {
-                                    props.advanceWinner(props.entrants[1])}}/>
+                                <Button title={props.entrants[1].name} color="pink" onPress={() => {
+                                    props.advanceWinner(props.entrants[1], props.matchId)}}/>
                                 </View>
                             </View>
                         </Modal>
