@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
     body: {
         backgroundColor: 'purple',
         flex: 1,
+        alignItems: 'center',
       },
     text: {
         fontSize: 28,
@@ -30,7 +31,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     vs: {
-        fontSize: 36,
-        fontWeight: '500',
+        fontSize: 18,
+        fontWeight: '900',
     },
 });

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import PropTypes from 'prop-types';
 import Round from './round.js';
 
@@ -7,10 +7,12 @@ const Bracket = props => {
     return (
         <View style={styles.body}>
             <Text style={[styles.text, styles.title]}>{props.game}</Text>
-                <View style={styles.bracket}>
+            <View style={styles.bracket}>
+                <ScrollView horizontal={true} contentContainerStyle={styles.scrollContainer}>
                     {props.bracket.map((matches, roundNo) => {
-                    return <Round matches={matches} key={`round${roundNo}`} />;
-                })}
+                        return <Round matches={matches} key={`round${roundNo}`} />;
+                    })}
+                </ScrollView>
             </View>
         </View>
     );
@@ -32,6 +34,10 @@ const styles = StyleSheet.create({
     bracket: {
         flex: 5,
         flexDirection: 'row',
+        width: 750,
+    },
+    scrollContainer: {
+        flex: 1,
     },
     text: {
           fontSize: 28,

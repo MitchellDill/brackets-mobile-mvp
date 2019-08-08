@@ -22,6 +22,7 @@ Round.propTypes = {
 const styles = StyleSheet.create({
     body: {
         backgroundColor: 'purple',
+        justifyContent: 'center',
         flex: 1,
       },
 });
