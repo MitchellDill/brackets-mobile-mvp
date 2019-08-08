@@ -41,11 +41,10 @@ const styles = StyleSheet.create({
       },
     bracket: {
         flex: 10,
-        flexDirection: 'row',
-        width: '180%',
     },
     scrollContainer: {
-        flex: 1,
+        flexDirection: 'row',
+        width: '180%',
     },
     text: {
           fontSize: 28,
