@@ -45,7 +45,16 @@ export default class App extends Component {
 
   buildCompetitors(totalEntrants) {
     const competitors = [];
-    const entrants = ['mitchell', 'morrisey', 'ron weasley', 'mollie'];
+    const entrants = [
+      'mitchell',
+      'morrisey',
+      'ron weasley',
+      'mollie',
+      'john boy',
+      'billy',
+      'fartknocker',
+      'king kong',
+    ];
     for (let i = 0; i < totalEntrants; i++) {
       const competitor = this.Competitor(entrants[i], i);
       competitors.push(competitor);
@@ -53,59 +62,51 @@ export default class App extends Component {
     return competitors;
   }
 
-  buildBracket(totalEntrants) {
+  buildBracket(totalEntrants, allCompetitors) {
     const bracket = [];
     let rounds = Math.log2(totalEntrants);
-    let entrants = this.state.entrants.slice();
+    let entrants = allCompetitors.slice();
 
     const seedBracket = competitors => {
       const round = [];
       const seedsArray = competitors.map(competitor => competitor.seed);
-      console.log('the seeds array says: ', seedsArray);
-      for (let i = 0; i < totalEntrants; i += 2) {
+      for (let i = 0; i < competitors.length; i += 2) {
         const highSeed = Math.max(...seedsArray);
         const lowSeed = Math.min(...seedsArray);
-        console.log('high seed is ', highSeed, ' and low seed is ', lowSeed);
         const match = competitors.filter(competitor => {
           return competitor.seed === highSeed || competitor.seed === lowSeed;
         });
-        competitors = entrants.filter(competitor => {
-          return competitor.seed !== highSeed || competitor.seed !== lowSeed;
-        });
+        seedsArray.pop();
+        seedsArray.shift();
         console.log('the match should be: ', match);
-        console.log(
-          'and now the remaining entrants to seed are: ',
-          competitors,
-        );
         round.push(match);
       }
       bracket.push(round);
     };
 
     for (let i = 0; i < rounds; i++) {
-      let round;
       if (i === 0) {
-        round = seedBracket(entrants);
+        seedBracket(entrants);
       } else {
-        round = seedBracket(
-          new Array(totalEntrants / Math.pow(2, i)).fill(
-            this.Competitor('bobo', Math.floor(Math.random() * 128)),
-          ),
+        let placeholderArray = new Array(totalEntrants / Math.pow(2, i)).fill(
+          null,
         );
+        placeholderArray = placeholderArray.map(placeholder => {
+          return this.Competitor('nobody', Math.random() * 64);
+        });
+        seedBracket(placeholderArray);
       }
-      bracket.push(round);
     }
-    console.log(bracket);
     return bracket;
   }
 
   componentDidMount() {
-    const competitors = this.buildCompetitors(4);
-    const bracket = this.buildBracket(4);
+    const competitors = this.buildCompetitors(8);
+    const bracket = this.buildBracket(8, competitors);
     this.setState({
       game: 'Mario Kart 64',
       entrants: competitors,
-      totalEntrants: 4,
+      totalEntrants: 8,
       bracket: bracket,
     });
   }
