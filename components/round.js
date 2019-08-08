@@ -4,16 +4,19 @@ import PropTypes from 'prop-types';
 import Match from './match.js';
 
 const Round = props => {
-    {console.log(props.entrants);}
     return (
-        <View style={styles.body}><Match entrants={props.entrants} /></View>
+        <View style={styles.body}>
+            {props.matches.map((match, matchNo) => {
+                return <Match entrants={match} key={`match${matchNo}`} />;
+            })}
+        </View>
     );
 };
 
 export default Round;
 
 Round.propTypes = {
-    entrants: PropTypes.arrayOf(PropTypes.object),
+    matches: PropTypes.arrayOf(PropTypes.array),
 };
 
 const styles = StyleSheet.create({

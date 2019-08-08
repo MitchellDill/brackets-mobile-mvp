@@ -7,7 +7,11 @@ const Bracket = props => {
     return (
         <View style={styles.body}>
             <Text style={[styles.text, styles.title]}>{props.game}</Text>
-            <Round entrants={props.entrants} />
+                <View style={styles.bracket}>
+                    {props.bracket.map((matches, roundNo) => {
+                    return <Round matches={matches} key={`round${roundNo}`} />;
+                })}
+            </View>
         </View>
     );
 };
@@ -16,8 +20,8 @@ export default Bracket;
 
 Bracket.propTypes = {
     game: PropTypes.string,
-    entrants: PropTypes.arrayOf(PropTypes.object),
     totalEntrants: PropTypes.number,
+    bracket: PropTypes.arrayOf(PropTypes.array),
 };
 
 const styles = StyleSheet.create({
@@ -25,13 +29,17 @@ const styles = StyleSheet.create({
         backgroundColor: 'purple',
         flex: 1,
       },
-      text: {
+    bracket: {
+        flex: 5,
+        flexDirection: 'row',
+    },
+    text: {
           fontSize: 28,
           color:'white',
           textAlign: 'center',
       },
-      title: {
-          flex: 3,
+    title: {
+          flex:1,
           fontSize: 38,
           fontWeight: '600',
           paddingTop: 5,

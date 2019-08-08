@@ -5,7 +5,7 @@
 # MVP Planned Feature List, Day 0:
 
 - Enter pool of competitors, their seeds specified, and receive an organized and persistent tournament structure
-- Default to a double-knockout structure, with a loser's bracket
+- Default to a double-knockout structure, with a losers' bracket
 - Scores of each match are recorded, with a default "Score" key
 - When a winner is selected, they advance in the tournament
 - Name and game are entered for each tournament and used to track it

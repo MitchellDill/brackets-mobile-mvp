@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
         flex: 1,
       },
     text: {
-        fontSize: 28,
+        fontSize: 22,
         color:'white',
         textAlign: 'center',
     },

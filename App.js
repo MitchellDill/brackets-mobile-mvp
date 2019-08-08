@@ -123,8 +123,8 @@ export default class App extends Component {
           this.state.entrants.length > 1 ? (
             <Bracket
               game={this.state.game}
-              entrants={this.state.entrants}
               totalEntrants={this.state.totalEntrants}
+              bracket={this.state.bracket}
             />
           ) : (
             <Setup
