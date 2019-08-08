@@ -13,7 +13,7 @@ const Round = props => {
                         selectMatch={props.selectMatch}
                         matchId={[props.roundId, matchNo]}
                         key={`match${matchNo}`}
-                      />
+                      />;
             })}
         </View>
     );

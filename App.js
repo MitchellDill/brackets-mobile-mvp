@@ -4,11 +4,19 @@
  */
 
 import React, {Component, Fragment} from 'react';
-import {SafeAreaView, StyleSheet, View, Text, StatusBar} from 'react-native';
+import {
+  SafeAreaView,
+  StyleSheet,
+  View,
+  Text,
+  Modal,
+  StatusBar,
+} from 'react-native';
 
 import Setup from './components/setup.js';
 import Bracket from './components/bracket.js';
 import Match from './components/match.js';
+import { throwStatement } from '@babel/types';
 
 export default class App extends Component {
   constructor(props) {
@@ -21,6 +29,8 @@ export default class App extends Component {
       matchIsSelected: false,
       roundSelected: 0,
       matchSelected: 0,
+      tournamentWinner: false,
+      modalVisible: false,
       text: '',
     };
     this.updateTextInput = this.updateTextInput.bind(this);
@@ -29,6 +39,8 @@ export default class App extends Component {
     this.buildBracket = this.buildBracket.bind(this);
     this.selectMatch = this.selectMatch.bind(this);
     this.goBack = this.goBack.bind(this);
+    this.askWinner = this.askWinner.bind(this);
+    this.advanceWinner = this.advanceWinner.bind(this);
   }
 
   updateTextInput(updatedText) {
@@ -51,7 +63,19 @@ export default class App extends Component {
   goBack() {
     this.setState({
       matchIsSelected: false,
+      modalVisible: false,
     });
+  }
+
+  askWinner(visible) {
+    this.setState({
+      modalVisible: visible,
+    });
+  }
+
+  advanceWinner(winner) {
+    this.goBack();
+    console.log('winner winner chicken dinner for ', winner.name);
   }
 
   Competitor(name, seed) {
@@ -149,6 +173,9 @@ export default class App extends Component {
               selected={this.state.matchIsSelected}
               roundAndMatchSelected={this.props.roundAndMatchSelected}
               entrants={this.state.bracket[this.state.roundSelected][this.state.matchSelected]}
+              askWinner={this.askWinner}
+              advanceWinner={this.advanceWinner}
+              modalVisible={this.state.modalVisible}
               goBack={this.goBack}
             />
           ) : (

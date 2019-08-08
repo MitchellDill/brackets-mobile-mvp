@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
+import { View, Text, StyleSheet, Button, Modal } from 'react-native';
 import PropTypes from 'prop-types';
 import Competitor from './competitor';
 
@@ -25,6 +25,23 @@ const Match = props => {
                             <Text style={[styles.text, styles.bigVs]}>VS.</Text>
                             <Competitor entrant={props.entrants[1]} corner={1} />
                     </View>
+                    <View style={styles.whoWon}>
+                        <Modal visible={props.modalVisible} transparent={false} animationType="fade" presentationStyle="formSheet">
+                            <View style={styles.modal}>
+                                <View style={styles.button}>
+                                    <Button title="[ <-- ]" color="yellow" onPress={props.goBack} />
+                                </View>
+                                <View style={styles.modalCompetitors}>
+                                <Button title={props.entrants[0].name} color="pink" onPress={(winner) => {
+                                    props.advanceWinner(props.entrants[0])}}/>
+                                <Text style={[styles.text, styles.vs]}>VS</Text>
+                                <Button title={props.entrants[1].name} color="pink" onPress={(winner) => {
+                                    props.advanceWinner(props.entrants[1])}}/>
+                                </View>
+                            </View>
+                        </Modal>
+                        <Button title="Who won??????" color="red" onPress={(visible) => {props.askWinner(true)}} />
+                    </View>
                     <View style={styles.chatZone}>
                         <Text style={[styles.text, styles.chat]}>chat chat chat chat chattin that mess</Text>
                     </View>
@@ -42,6 +59,9 @@ Match.propTypes = {
     selected: PropTypes.bool,
     selectMatch: PropTypes.func,
     matchId: PropTypes.arrayOf(PropTypes.number),
+    askWinner: PropTypes.func,
+    advanceWinner: PropTypes.func,
+    modalVisible: PropTypes.bool,
     goBack: PropTypes.func,
 };
 
@@ -71,6 +91,25 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'flex-start',
         alignSelf: 'flex-end',
+    },
+    whoWon: {
+        flex: 1,
+        alignSelf: 'stretch',
+        paddingTop: 3,
+        paddingBottom: 3,
+    },
+    modal: {
+        flex: 1,
+        backgroundColor: 'black',
+        marginTop: 22,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    modalCompetitors: {
+        flex: 8,
+        alignSelf: 'stretch',
+        justifyContent: 'space-around',
+        paddingBottom: 12,
     },
     text: {
         fontSize: 20,
