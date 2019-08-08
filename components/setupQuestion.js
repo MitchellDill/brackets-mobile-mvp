@@ -1,15 +1,14 @@
 import React from 'react';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
-import Entrant from './entrant.js';
+import Entrants from './entrants.js';
 
 const SetupQuestion = props => {
     return (
         <View style={styles.body}>
             <Text style={[styles.text, styles.question]}>{props.question}</Text>
-            {props.totalEntrants ? new Array(props.totalEntrants).fill(true).map(entrant => {
-                return <Entrant />
-                })
+            {props.totalEntrants ? 
+              <Entrants totalEntrants={props.totalEntrants} finalizeEntrants={props.finalizeEntrants} />
             : <TextInput
                 style={[styles.text, styles.field]}
                 editable={true}
@@ -29,6 +28,7 @@ SetupQuestion.propTypes = {
     totalEntrants: PropTypes.number,
     updateTextInput: PropTypes.func,
     handleTextSubmit: PropTypes.func,
+    finalizeEntrants: PropTypes.func,
 };
 
 const styles = StyleSheet.create({

@@ -41,6 +41,7 @@ export default class App extends Component {
     this.Competitor = this.Competitor.bind(this);
     this.buildCompetitors = this.buildCompetitors.bind(this);
     this.buildBracket = this.buildBracket.bind(this);
+    this.finalizeEntrants = this.finalizeEntrants.bind(this);
     this.selectMatch = this.selectMatch.bind(this);
     this.goBack = this.goBack.bind(this);
     this.askWinner = this.askWinner.bind(this);
@@ -67,6 +68,12 @@ export default class App extends Component {
 
   recordSetup(field, text) {
     this.setState({[field]: text});
+  }
+
+  finalizeEntrants(entrantNames) {
+    const competitors = this.buildCompetitors(this.state.totalEntrants, entrantNames);
+    const builtBracket = this.buildBracket(this.state.totalEntrants, competitors);
+    this.setState({bracket: builtBracket});
   }
 
   selectMatch(matchNo) {
@@ -118,18 +125,8 @@ export default class App extends Component {
     return {name, seed, wins};
   }
 
-  buildCompetitors(totalEntrants) {
+  buildCompetitors(totalEntrants, entrants) {
     const competitors = [];
-    const entrants = [
-      'mitchell',
-      'morrisey',
-      'ron weasley',
-      'mollie',
-      'john boy',
-      'billy',
-      'fartknocker',
-      'king kong',
-    ];
     for (let i = 0; i < totalEntrants; i++) {
       const competitor = this.Competitor(entrants[i], i);
       competitors.push(competitor);
@@ -221,6 +218,7 @@ export default class App extends Component {
               totalEntrants={this.state.totalEntrants}
               updateTextInput={this.updateTextInput}
               handleTextSubmit={this.handleTextSubmit}
+              finalizeEntrants={this.finalizeEntrants}
             />
           )}
         </SafeAreaView>
