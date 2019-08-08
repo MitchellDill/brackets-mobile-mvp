@@ -10,15 +10,25 @@ const Match = props => {
             <View style={styles.body}>
                 <Button title={props.entrants[0].name} color="pink" onPress={(matchId) => {
                     props.selectMatch(props.matchId)}}/>
-                    <Text style={[styles.text, styles.vs]}>VS.</Text>
+                    <Text style={[styles.text, styles.vs]}>VS</Text>
                 <Button title={props.entrants[1].name} color="pink" onPress={(matchId) => {
                     props.selectMatch(props.matchId)}}/>
             </View>
             : (
              <View style={styles.body}>
-                <Competitor entrant={props.entrants[0]}/>
-                    <Text style={[styles.text, styles.bigVs]}>VS.</Text>
-                <Competitor entrant={props.entrants[1]}/>
+                <View style={styles.button}>
+                <Button title="[ <-- ]" color="yellow" onPress={props.goBack} />
+                </View>
+                <View style={styles.matchScreen}>
+                    <View style={styles.competitors}>
+                            <Competitor entrant={props.entrants[0]} corner={0} />
+                            <Text style={[styles.text, styles.bigVs]}>VS.</Text>
+                            <Competitor entrant={props.entrants[1]} corner={1} />
+                    </View>
+                    <View style={styles.chatZone}>
+                        <Text style={[styles.text, styles.chat]}>chat chat chat chat chattin that mess</Text>
+                    </View>
+                </View>
             </View>
             ) }
         </Fragment>
@@ -32,19 +42,44 @@ Match.propTypes = {
     selected: PropTypes.bool,
     selectMatch: PropTypes.func,
     matchId: PropTypes.arrayOf(PropTypes.number),
+    goBack: PropTypes.func,
 };
 
 const styles = StyleSheet.create({
     body: {
-        backgroundColor: 'purple',
         flex: 1,
+        backgroundColor: 'purple',
         justifyContent: 'center',
         alignItems: 'center',
       },
+    matchScreen: {
+        flex: 10,
+        justifyContent: 'center',
+        alignItems: 'flex-start',
+    },
+    competitors: {
+        flex: 2,
+        alignSelf: 'stretch',
+        justifyContent: 'space-between',
+        paddingBottom: 12,
+    },
+    chatZone: {
+        flex: 7,
+        backgroundColor: 'black',
+    },
+    button: {
+        flex: 1,
+        justifyContent: 'flex-start',
+        alignSelf: 'flex-end',
+    },
     text: {
-        fontSize: 28,
+        fontSize: 20,
         color:'white',
         textAlign: 'center',
+    },
+    chat: {
+        textAlign: 'left',
+        padding: 6,
     },
     vs: {
         fontSize: 18,

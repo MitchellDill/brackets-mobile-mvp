@@ -28,6 +28,7 @@ export default class App extends Component {
     this.buildCompetitors = this.buildCompetitors.bind(this);
     this.buildBracket = this.buildBracket.bind(this);
     this.selectMatch = this.selectMatch.bind(this);
+    this.goBack = this.goBack.bind(this);
   }
 
   updateTextInput(updatedText) {
@@ -45,6 +46,12 @@ export default class App extends Component {
       matchSelected: match,
     });
     console.log('round ', round, 'match ', match);
+  }
+
+  goBack() {
+    this.setState({
+      matchIsSelected: false,
+    });
   }
 
   Competitor(name, seed) {
@@ -142,6 +149,7 @@ export default class App extends Component {
               selected={this.state.matchIsSelected}
               roundAndMatchSelected={this.props.roundAndMatchSelected}
               entrants={this.state.bracket[this.state.roundSelected][this.state.matchSelected]}
+              goBack={this.goBack}
             />
           ) : (
             <Setup

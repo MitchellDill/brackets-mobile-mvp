@@ -1,12 +1,20 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 
 const Competitor = props => {
     return (
-        <View style={styles.body}>
-            <Text style={[styles.text, styles.competitor]}>{props.entrant.name}</Text>
-        </View>
+        <Fragment>
+        {props.corner === 0 ?
+            <View style={[styles.body, styles.firstCompetitor]}>
+                <Text style={[styles.text, styles.competitor]}>{props.entrant.name}</Text>
+            </View>
+        :
+            <View style={[styles.body, styles.secondCompetitor]}>
+                <Text style={[styles.text, styles.competitor]}>{props.entrant.name}</Text>
+            </View>
+        }
+        </Fragment>
     );
 };
 
@@ -14,23 +22,31 @@ export default Competitor;
 
 Competitor.propTypes = {
     entrant: PropTypes.object,
+    corner: PropTypes.number,
 };
 
 const styles = StyleSheet.create({
     body: {
-        backgroundColor: 'purple',
         flex: 1,
+        backgroundColor: 'pink',
+        justifyContent: 'center',
+        borderRadius: 7,
       },
     text: {
         fontSize: 22,
         color:'white',
         textAlign: 'center',
     },
-    title: {
-        flex: 2,
-        fontSize: 34,
+    competitor: {
+        fontSize: 28,
         fontWeight: '400',
-        paddingTop: 5,
-        paddingBottom: 5,
+    },
+    firstCompetitor: {
+        alignSelf: 'flex-start',
+        paddingLeft: 5,
+    },
+    secondCompetitor: {
+        alignSelf: 'flex-end',
+        paddingRight: 5,
     },
 });
