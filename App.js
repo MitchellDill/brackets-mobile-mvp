@@ -16,6 +16,7 @@ import {
 import Setup from './components/setup.js';
 import Bracket from './components/bracket.js';
 import Match from './components/match.js';
+import Gameover from './components/gameover.js';
 
 export default class App extends Component {
   constructor(props) {
@@ -28,7 +29,8 @@ export default class App extends Component {
       matchIsSelected: false,
       roundSelected: 0,
       matchSelected: 0,
-      tournamentWinner: false,
+      tournamentOver: false,
+      tournamentWinner: null,
       modalVisible: false,
       text: '',
     };
@@ -75,14 +77,23 @@ export default class App extends Component {
   advanceWinner(winner, matchNo) {
     let [round, match] = matchNo;
     let corner = (match + 2) % 2;
-    let bracketUpdate = this.state.bracket.slice();
-    let nextMatch = bracketUpdate[round + 1][Math.floor(match / 2)];
-    nextMatch[corner] = winner;
-    winner.wins += 1;
-    this.setState({
-      bracket: bracketUpdate,
-    });
-    this.goBack();
+    if (round === this.state.bracket.length - 1) {
+      this.setState({
+        tournamentOver: true,
+        tournamentWinner: winner,
+        matchIsSelected: false,
+        modalVisible: false,
+      });
+    } else {
+      let bracketUpdate = this.state.bracket.slice();
+      let nextMatch = bracketUpdate[round + 1][Math.floor(match / 2)];
+      nextMatch[corner] = winner;
+      winner.wins += 1;
+      this.setState({
+        bracket: bracketUpdate,
+      });
+      this.goBack();
+    }
   }
 
   Competitor(name, seed, wins = 0) {
@@ -164,10 +175,12 @@ export default class App extends Component {
       <Fragment>
         <StatusBar barStyle="dark-content" />
         <SafeAreaView style={styles.safe}>
-          {this.state.game &&
-          this.state.totalEntrants &&
-          this.state.entrants.length > 1 &&
-          this.state.matchIsSelected === false ? (
+          {this.state.tournamentOver ? (
+            <Gameover winner={this.state.tournamentWinner} />
+          ) : this.state.game &&
+            this.state.totalEntrants &&
+            this.state.entrants.length > 1 &&
+            this.state.matchIsSelected === false ? (
             <Bracket
               game={this.state.game}
               totalEntrants={this.state.totalEntrants}
