@@ -1,22 +1,19 @@
 import React from 'react';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
-import Entrants from './entrants.js';
 
 const SetupQuestion = props => {
     return (
         <View style={styles.body}>
             <Text style={[styles.text, styles.question]}>{props.question}</Text>
-            {props.totalEntrants ? 
-              <Entrants totalEntrants={props.totalEntrants} finalizeEntrants={props.finalizeEntrants} />
-            : <TextInput
+            <TextInput
                 style={[styles.text, styles.field]}
                 editable={true}
-                onChangeText={(text)=>{props.updateTextInput(text);}}
+                onChangeText={(text)=>{props.updateTextInput(text)}}
                 onSubmitEditing={(e) => {props.handleTextSubmit(e, props.field)}}
                 >
                 ...
-              </TextInput>}
+              </TextInput>
         </View>
     );
 };
@@ -43,8 +40,9 @@ const styles = StyleSheet.create({
     },
     question: {
         flex: 2,
-        fontSize: 30,
-        fontWeight: '400',
+        fontSize: 24,
+        fontWeight: '300',
+        alignSelf: 'center',
     },
     field: {
         flex: 5,

@@ -23,7 +23,7 @@ export default class App extends Component {
     super(props);
     this.state = {
       game: '',
-      entrants: [{}],
+      entrants: [],
       totalEntrants: 0,
       bracket: [],
       matchIsSelected: false,
@@ -73,7 +73,11 @@ export default class App extends Component {
   finalizeEntrants(entrantNames) {
     const competitors = this.buildCompetitors(this.state.totalEntrants, entrantNames);
     const builtBracket = this.buildBracket(this.state.totalEntrants, competitors);
-    this.setState({bracket: builtBracket});
+    this.setState({
+      entrants: competitors,
+      bracket: builtBracket,
+    });
+    console.log(builtBracket, this.state);
   }
 
   selectMatch(matchNo) {

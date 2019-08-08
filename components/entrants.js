@@ -26,13 +26,14 @@ export default class Entrants extends Component {
         updatedEntrants.push(entrant);
         console.log(entrant);
         this.setState({entrants: updatedEntrants});
-        updatedEntrants.length === this.props.totalEntrants - 1 ? this.props.finalizeEntrants(updatedEntrants) : null;
+        updatedEntrants.length === this.props.totalEntrants ? this.props.finalizeEntrants(updatedEntrants) : null;
     }
 
     render() {
         return (
             <View style={styles.fieldsContainer}>
-                {new Array(this.props.totalEntrants).fill(true).map(entrant => {
+                <Text style={[styles.text, styles.question]}>{this.props.question}</Text>
+                {[...Array(this.props.totalEntrants).keys()].fill(true).map(entrant => {
                 return  <TextInput
                           style={[styles.text, styles.field]}
                           editable={true}
@@ -51,6 +52,7 @@ export default class Entrants extends Component {
 Entrants.propTypes = {
     totalEntrants: PropTypes.number,
     finalizeEntrants: PropTypes.func,
+    question: PropTypes.string,
 };
 
 const styles = StyleSheet.create({
@@ -67,8 +69,14 @@ const styles = StyleSheet.create({
         flex: 2,
         backgroundColor: 'pink',
     },
-    fields: {
+    fieldsContainer: {
         flex: 1,
         justifyContent: 'space-around',
+    },
+    question: {
+        flex: 2,
+        fontSize: 24,
+        fontWeight: '300',
+        alignSelf: 'center',
     },
 });
