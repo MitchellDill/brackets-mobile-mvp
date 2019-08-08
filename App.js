@@ -34,7 +34,10 @@ export default class App extends Component {
       modalVisible: false,
       text: '',
     };
+
     this.updateTextInput = this.updateTextInput.bind(this);
+    this.handleTextSubmit = this.handleTextSubmit.bind(this);
+    this.recordSetup = this.recordSetup.bind(this);
     this.Competitor = this.Competitor.bind(this);
     this.buildCompetitors = this.buildCompetitors.bind(this);
     this.buildBracket = this.buildBracket.bind(this);
@@ -49,6 +52,21 @@ export default class App extends Component {
     this.setState({
       text: updatedText,
     });
+  }
+
+  handleTextSubmit(e, field) {
+    let text = e.nativeEvent.text;
+    console.log(e.nativeEvent.text);
+    if (field === 'game') {
+      text = `[${text.toLowerCase()}]`;
+    } else if (field === 'totalEntrants') {
+      text = Number(text);
+    }
+    this.recordSetup(field, text);
+  }
+
+  recordSetup(field, text) {
+    this.setState({[field]: text});
   }
 
   selectMatch(matchNo) {
@@ -158,17 +176,15 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    const competitors = this.buildCompetitors(8);
-    const bracket = this.buildBracket(8, competitors);
-    this.setState({
-      game: 'Mario Kart 64',
-      entrants: competitors,
-      totalEntrants: 8,
-      bracket: bracket,
-    });
+    // const competitors = this.buildCompetitors(8);
+    // const bracket = this.buildBracket(8, competitors);
+    // this.setState({
+    //   game: 'Mario Kart 64',
+    //   entrants: competitors,
+    //   totalEntrants: 8,
+    //   bracket: bracket,
+    // });
   }
-
-  recordSetup(field) {}
 
   render() {
     return (
@@ -204,6 +220,7 @@ export default class App extends Component {
               entrants={this.state.entrants}
               totalEntrants={this.state.totalEntrants}
               updateTextInput={this.updateTextInput}
+              handleTextSubmit={this.handleTextSubmit}
             />
           )}
         </SafeAreaView>

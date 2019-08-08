@@ -1,13 +1,16 @@
 import React from 'react';
-import { View, Text, TextInput, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
+import SetupQuestion from './setupQuestion.js';
 
 const Setup = props => {
     return (
         <View style={styles.body}>
             <Text style={[styles.text, styles.title]}>{'['}brackets{']'}</Text>
-            <Text style={[styles.text, styles.question]}>Whatchu playin?</Text>
-            <TextInput style={[styles.text, styles.field]} editable={true} onChangeText={(text)=>{props.updateTextInput(text);}}>...</TextInput>
+            {props.totalEntrants > 1 ? <SetupQuestion question="Enter all y'all's names in, if you please." field="entrants" handleTextSubmit={props.handleTextSubmit} updateTextInput={props.updateTextInput} />
+            : props.game ? <SetupQuestion question="How many of y'all are gettin in on this?" field="totalEntrants" handleTextSubmit={props.handleTextSubmit} updateTextInput={props.updateTextInput} />
+            : <SetupQuestion question="Whatchu playin, partner?" field="game" handleTextSubmit={props.handleTextSubmit} updateTextInput={props.updateTextInput} />
+            }
         </View>
     );
 };
@@ -19,6 +22,7 @@ Setup.propTypes = {
     entrants: PropTypes.arrayOf(PropTypes.object),
     totalEntrants: PropTypes.number,
     updateTextInput: PropTypes.func,
+    handleTextSubmit: PropTypes.func,
 };
 
 const styles = StyleSheet.create({
@@ -36,14 +40,5 @@ const styles = StyleSheet.create({
         fontSize: 42,
         fontWeight: '700',
         paddingTop: 5,
-    },
-    question: {
-        flex: 2,
-        fontSize: 30,
-        fontWeight: '400',
-    },
-    field: {
-        flex: 5,
-        backgroundColor: 'pink',
     },
 });
