@@ -10,9 +10,9 @@ const Bracket = props => {
             <View style={styles.bracket}>
                 <ScrollView horizontal={true} contentContainerStyle={styles.scrollContainer}>
                     {props.bracket.map((matches, roundNo) => {
-                        return <Round 
+                        return <Round
                                     matches={matches}
-                                    matchSelected={props.matchSelected}
+                                    matchIsSelected={props.matchIsSelected}
                                     selectMatch={props.selectMatch}
                                     roundId={roundNo}
                                     key={`round${roundNo}`}
@@ -30,7 +30,7 @@ Bracket.propTypes = {
     game: PropTypes.string,
     totalEntrants: PropTypes.number,
     bracket: PropTypes.arrayOf(PropTypes.array),
-    matchSelected: PropTypes.bool,
+    matchIsSelected: PropTypes.bool,
     selectMatch: PropTypes.func,
 };
 

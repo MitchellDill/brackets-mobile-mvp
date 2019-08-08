@@ -17,7 +17,7 @@ const Match = props => {
             : (
              <View style={styles.body}>
                 <Competitor entrant={props.entrants[0]}/>
-                    <Text style={[styles.text, styles.vs]}>VS.</Text>
+                    <Text style={[styles.text, styles.bigVs]}>VS.</Text>
                 <Competitor entrant={props.entrants[1]}/>
             </View>
             ) }
@@ -48,6 +48,10 @@ const styles = StyleSheet.create({
     },
     vs: {
         fontSize: 18,
+        fontWeight: '800',
+    },
+    bigVs: {
+        fontSize: 26,
         fontWeight: '900',
     },
 });

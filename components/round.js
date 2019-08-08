@@ -9,7 +9,7 @@ const Round = props => {
             {props.matches.map((match, matchNo) => {
               return <Match
                         entrants={match}
-                        selected={props.matchSelected}
+                        selected={props.matchIsSelected}
                         selectMatch={props.selectMatch}
                         matchId={[props.roundId, matchNo]}
                         key={`match${matchNo}`}
@@ -23,7 +23,7 @@ export default Round;
 
 Round.propTypes = {
     matches: PropTypes.arrayOf(PropTypes.array),
-    matchSelected: PropTypes.bool,
+    matchIsSelected: PropTypes.bool,
     selectMatch: PropTypes.func,
     roundId: PropTypes.number,
 };

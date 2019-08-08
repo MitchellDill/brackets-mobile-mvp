@@ -4,14 +4,7 @@
  */
 
 import React, {Component, Fragment} from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-} from 'react-native';
+import {SafeAreaView, StyleSheet, View, Text, StatusBar} from 'react-native';
 
 import Setup from './components/setup.js';
 import Bracket from './components/bracket.js';
@@ -25,7 +18,9 @@ export default class App extends Component {
       entrants: [{}],
       totalEntrants: 0,
       bracket: [],
-      matchSelected: false,
+      matchIsSelected: false,
+      roundSelected: 0,
+      matchSelected: 0,
       text: '',
     };
     this.updateTextInput = this.updateTextInput.bind(this);
@@ -43,7 +38,13 @@ export default class App extends Component {
   }
 
   selectMatch(matchNo) {
-    console.log('match number ', matchNo);
+    let [round, match] = matchNo;
+    this.setState({
+      matchIsSelected: true,
+      roundSelected: round,
+      matchSelected: match,
+    });
+    console.log('round ', round, 'match ', match);
   }
 
   Competitor(name, seed) {
@@ -128,16 +129,20 @@ export default class App extends Component {
           {this.state.game &&
           this.state.totalEntrants &&
           this.state.entrants.length > 1 &&
-          this.state.matchSelected === false ? (
+          this.state.matchIsSelected === false ? (
             <Bracket
               game={this.state.game}
               totalEntrants={this.state.totalEntrants}
               bracket={this.state.bracket}
-              matchSelected={this.state.matchSelected}
+              matchIsSelected={this.state.matchIsSelected}
               selectMatch={this.selectMatch}
             />
-          ) : this.state.matchSelected === true ? (
-            <Match selected={this.state.matchSelected} />
+          ) : this.state.matchIsSelected === true ? (
+            <Match
+              selected={this.state.matchIsSelected}
+              roundAndMatchSelected={this.props.roundAndMatchSelected}
+              entrants={this.state.bracket[this.state.roundSelected][this.state.matchSelected]}
+            />
           ) : (
             <Setup
               game={this.state.game}
