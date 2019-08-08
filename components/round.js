@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableHighlight } from 'react-native';
 import PropTypes from 'prop-types';
 import Match from './match.js';
 
@@ -7,7 +7,13 @@ const Round = props => {
     return (
         <View style={styles.body}>
             {props.matches.map((match, matchNo) => {
-                return <Match entrants={match} key={`match${matchNo}`} />;
+              return <Match
+                        entrants={match}
+                        selected={props.matchSelected}
+                        selectMatch={props.selectMatch}
+                        matchId={[props.roundId, matchNo]}
+                        key={`match${matchNo}`}
+                      />
             })}
         </View>
     );
@@ -17,6 +23,9 @@ export default Round;
 
 Round.propTypes = {
     matches: PropTypes.arrayOf(PropTypes.array),
+    matchSelected: PropTypes.bool,
+    selectMatch: PropTypes.func,
+    roundId: PropTypes.number,
 };
 
 const styles = StyleSheet.create({

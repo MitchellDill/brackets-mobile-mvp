@@ -15,6 +15,7 @@ import {
 
 import Setup from './components/setup.js';
 import Bracket from './components/bracket.js';
+import Match from './components/match.js';
 
 export default class App extends Component {
   constructor(props) {
@@ -24,12 +25,14 @@ export default class App extends Component {
       entrants: [{}],
       totalEntrants: 0,
       bracket: [],
+      matchSelected: false,
       text: '',
     };
     this.updateTextInput = this.updateTextInput.bind(this);
     this.Competitor = this.Competitor.bind(this);
     this.buildCompetitors = this.buildCompetitors.bind(this);
     this.buildBracket = this.buildBracket.bind(this);
+    this.selectMatch = this.selectMatch.bind(this);
   }
 
   updateTextInput(updatedText) {
@@ -37,6 +40,10 @@ export default class App extends Component {
     this.setState({
       text: updatedText,
     });
+  }
+
+  selectMatch(matchNo) {
+    console.log('match number ', matchNo);
   }
 
   Competitor(name, seed) {
@@ -92,7 +99,7 @@ export default class App extends Component {
           null,
         );
         placeholderArray = placeholderArray.map(placeholder => {
-          return this.Competitor('nobody', Math.random() * 64);
+          return this.Competitor('TBD', Math.random() * 64);
         });
         seedBracket(placeholderArray);
       }
@@ -120,12 +127,17 @@ export default class App extends Component {
         <SafeAreaView style={styles.safe}>
           {this.state.game &&
           this.state.totalEntrants &&
-          this.state.entrants.length > 1 ? (
+          this.state.entrants.length > 1 &&
+          this.state.matchSelected === false ? (
             <Bracket
               game={this.state.game}
               totalEntrants={this.state.totalEntrants}
               bracket={this.state.bracket}
+              matchSelected={this.state.matchSelected}
+              selectMatch={this.selectMatch}
             />
+          ) : this.state.matchSelected === true ? (
+            <Match selected={this.state.matchSelected} />
           ) : (
             <Setup
               game={this.state.game}

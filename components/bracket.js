@@ -10,7 +10,13 @@ const Bracket = props => {
             <View style={styles.bracket}>
                 <ScrollView horizontal={true} contentContainerStyle={styles.scrollContainer}>
                     {props.bracket.map((matches, roundNo) => {
-                        return <Round matches={matches} key={`round${roundNo}`} />;
+                        return <Round 
+                                    matches={matches}
+                                    matchSelected={props.matchSelected}
+                                    selectMatch={props.selectMatch}
+                                    roundId={roundNo}
+                                    key={`round${roundNo}`}
+                                />;
                     })}
                 </ScrollView>
             </View>
@@ -24,6 +30,8 @@ Bracket.propTypes = {
     game: PropTypes.string,
     totalEntrants: PropTypes.number,
     bracket: PropTypes.arrayOf(PropTypes.array),
+    matchSelected: PropTypes.bool,
+    selectMatch: PropTypes.func,
 };
 
 const styles = StyleSheet.create({
@@ -34,7 +42,7 @@ const styles = StyleSheet.create({
     bracket: {
         flex: 5,
         flexDirection: 'row',
-        width: 750,
+        width: '200%',
     },
     scrollContainer: {
         flex: 1,
