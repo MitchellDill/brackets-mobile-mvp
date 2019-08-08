@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
     body: {
         backgroundColor: 'purple',
         flex: 1,
+        justifyContent: 'center',
         alignItems: 'center',
       },
     text: {

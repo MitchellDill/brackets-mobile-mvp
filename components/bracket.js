@@ -40,9 +40,9 @@ const styles = StyleSheet.create({
         flex: 1,
       },
     bracket: {
-        flex: 5,
+        flex: 10,
         flexDirection: 'row',
-        width: '200%',
+        width: '180%',
     },
     scrollContainer: {
         flex: 1,
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
           textAlign: 'center',
       },
     title: {
-          flex:1,
+          flex: 1,
           fontSize: 38,
           fontWeight: '600',
           paddingTop: 5,
