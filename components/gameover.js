@@ -13,9 +13,14 @@ const Gameover = props => {
                 </View>
                 <View style={styles.statBlock}>
                     <Text style={[styles.text, styles.stats]}>WINS: {props.winner.wins}</Text>
-                    <Text style={[styles.text, styles.stats, styles.victories]}>personally saw to the misfortune of
+                    <Text style={[styles.text, styles.stats, styles.victories]}>{`personally saw to the ${props.game}-related misfortune of`}
                     {props.winner.victoriesOver.map((foe, i, foes) => {
-                       return i < foes.lenth - 1 ? ` ${foe} and` : ` ${foe}`;
+                       return (
+                           i < foes.length - 1 ? 
+                           <Text style={[styles.text, styles.stats, styles.victories]} key={`defeated${i}`}>{` ${foe} and`}</Text>
+                           :
+                           <Text style={[styles.text, styles.stats, styles.victories]} key={`defeated${i}`}>{` ${foe}`}</Text>
+                           );
                     })}
                     </Text>
                 </View>
@@ -27,6 +32,7 @@ const Gameover = props => {
 export default Gameover;
 
 Gameover.propTypes = {
+    game: PropTypes.string,
     winner: PropTypes.object,
 };
 
@@ -34,7 +40,9 @@ const styles = StyleSheet.create({
     body: {
         flex: 1,
         backgroundColor: 'black',
-        justifyContent: 'space-around',
+        justifyContent: 'center',
+        paddingBottom: 12,
+        paddingTop: 12,
       },
     text: {
         fontSize: 22,
@@ -47,15 +55,18 @@ const styles = StyleSheet.create({
         color: 'pink',
     },
     winnerMessage: {
+        flex: 2,
         justifyContent: 'center',
         paddingTop: 8,
     },
     statBlock: {
+        flex: 3,
         justifyContent: 'center',
         paddingBottom: 20,
     },
     stats: {
         fontSize: 26,
+        color: 'gold',
     },
     victories: {
         paddingTop: 12,

@@ -56,12 +56,12 @@ const Match = props => {
                     </View>
                     <View style={styles.statBlock}>
                         <Text style={[styles.text, styles.stats]}>
-                            most turtles: 7
+                            here's an interesting stat!
                         </Text>
                     </View>
                     <View style={styles.chatZone}>
                         <Text style={[styles.text, styles.chat]}>
-                            chat chat chat chat chattin that mess
+                            chat chat chat chat chattin that NASTY mess
                         </Text>
                     </View>
                 </View>

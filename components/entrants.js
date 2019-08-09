@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, StyleSheet } from 'react-native';
+import { View, Text, TextInput, StyleSheet, KeyboardAvoidingView } from 'react-native';
 import PropTypes from 'prop-types';
 
 export default class Entrants extends Component {
@@ -44,7 +44,7 @@ export default class Entrants extends Component {
 
     render() {
         return (
-            <View style={styles.fieldsContainer}>
+            <KeyboardAvoidingView style={styles.fieldsContainer} behavior="padding" enabled>
                 <Text style={[styles.text, styles.question]}>{this.props.question}</Text>
                 <View style={[styles.text, styles.entrants]}>
                 {this.state.entrants ? this.state.entrants.map((entrant, i) => {
@@ -71,7 +71,7 @@ export default class Entrants extends Component {
                           onChangeText={(text)=>{this.updateTextInput(text);}}
                           onSubmitEditing={(e) => {this.handleEntrantSubmit(e);}}
                         /> : null}
-            </View>
+            </KeyboardAvoidingView>
         );
     }
 }

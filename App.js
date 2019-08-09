@@ -187,7 +187,10 @@ export default class App extends Component {
         <StatusBar barStyle="dark-content" />
         <SafeAreaView style={styles.safe}>
           {this.state.tournamentOver ? (
-            <Gameover winner={this.state.tournamentWinner} />
+            <Gameover
+              winner={this.state.tournamentWinner}
+              game={this.state.game}
+            />
           ) : this.state.game &&
             this.state.totalEntrants &&
             this.state.entrants.length > 1 &&
