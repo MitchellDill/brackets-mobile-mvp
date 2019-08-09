@@ -8,6 +8,7 @@ export default class Entrants extends Component {
         this.state = {
             text: '',
             entrants: [],
+            currentEntrant: 1,
         };
         this.updateTextInput = this.updateTextInput.bind(this);
         this.handleEntrantSubmit = this.handleEntrantSubmit.bind(this);
@@ -22,38 +23,46 @@ export default class Entrants extends Component {
 
     handleEntrantSubmit(e) {
         let entrant = e.nativeEvent.text;
+        let entrantRef = `entrant${this.state.currentEntrant}`;
+        let nextEntrant = this.state.currentEntrant + 1;
+        let nextEntrantRef = `entrant${nextEntrant}`;
         let updatedEntrants = this.state.entrants.slice();
         updatedEntrants.push(entrant);
         this.setState({
-            entrants: updatedEntrants
+            currentEntrant: nextEntrant,
+            entrants: updatedEntrants,
         });
-        updatedEntrants.length === this.props.totalEntrants ?
-          this.props.finalizeEntrants(updatedEntrants)
-          : null;
+        if (updatedEntrants.length === this.props.totalEntrants) {
+            this.props.finalizeEntrants(updatedEntrants)
+        } else {
+            this.refs[entrantRef].clear();
+            setTimeout(() => {
+                this.refs[nextEntrantRef].focus();
+            }, 200);
+        }
     }
 
     render() {
         return (
             <View style={styles.fieldsContainer}>
                 <Text style={[styles.text, styles.question]}>{this.props.question}</Text>
-                {[...Array(this.props.totalEntrants - this.state.entrants.length).keys()]
-                  .fill(true)
-                  .map((entrant, i) => {
-                return  <TextInput
+                {this.state.currentEntrant <= this.props.totalEntrants ?
+                  <TextInput
+                          ref={`entrant${this.state.currentEntrant}`}
                           style={[styles.text, styles.field]}
                           editable={true}
                           autoCorrect={false}
                           spellcheck={false}
                           maxLength={32}
-                          placeholder={`entrant #${i + 1}`}
+                          clearTextOnFocus={true}
+                          autoFocus={true}
+                          enablesReturnKeyAutomatically={true}
+                          placeholder={`entrant #${this.state.currentEntrant}`}
                           onChangeText={(text)=>{this.updateTextInput(text);}}
                           onSubmitEditing={(e) => {this.handleEntrantSubmit(e);}}
-                          key={`entrantInput${i}`}
-                        />;
-                  })}
+                        /> : null}
             </View>
-
-        )
+        );
     }
 }
 

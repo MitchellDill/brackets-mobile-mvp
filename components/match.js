@@ -11,7 +11,7 @@ const Match = props => {
                 <Button title={`[${props.entrants[0].name}]`} color="pink" onPress={(matchId) => {
                     props.selectMatch(props.matchId)}}/>
                     <Text style={[styles.text, styles.vs]}>VS</Text>
-                <Button title={`[${props.entrants[1].name}`} color="pink" onPress={(matchId) => {
+                <Button title={`[${props.entrants[1].name}]`} color="pink" onPress={(matchId) => {
                     props.selectMatch(props.matchId)}}/>
             </View>
             : (
@@ -44,7 +44,7 @@ const Match = props => {
                                 </View>
                             </View>
                         </Modal>
-                        <Button title="Who won??????" color="red" onPress={(visible) => {props.askWinner(true)}} />
+                        <Button title="who won??????" color="pink" onPress={(visible) => {props.askWinner(true)}} />
                     </View>
                     <View style={styles.chatZone}>
                         <Text style={[styles.text, styles.chat]}>

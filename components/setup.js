@@ -18,10 +18,10 @@ const Setup = props => {
               />
             : props.game ?
               <SetupQuestion
-                question="how many of y'all are gettin in on this?"
+                question="how many of y'all are gonna get in on this?"
                 field="totalEntrants"
                 handleTextSubmit={props.handleTextSubmit}
-                updateTextInput={props.updateTextInput} 
+                updateTextInput={props.updateTextInput}
               />
             : <SetupQuestion
                 question="whatchu playin, partner?"

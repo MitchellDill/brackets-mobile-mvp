@@ -7,11 +7,11 @@ const Competitor = props => {
         <Fragment>
         {props.corner === 0 ?
             <View style={[styles.body, styles.firstCompetitor]}>
-                <Text style={[styles.text, styles.competitor]}>{props.entrant.name}</Text>
+                <Text style={[styles.text, styles.competitor]}>{`[ ${props.entrant.name}`}</Text>
             </View>
         :
             <View style={[styles.body, styles.secondCompetitor]}>
-                <Text style={[styles.text, styles.competitor]}>{props.entrant.name}</Text>
+                <Text style={[styles.text, styles.competitor]}>{`${props.entrant.name} ]`}</Text>
             </View>
         }
         </Fragment>
@@ -30,7 +30,9 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         paddingLeft: 6,
-        paddingRight:6,
+        paddingRight: 6,
+        borderBottomWidth: 2,
+        borderBottomColor: 'pink',
       },
     text: {
         fontSize: 22,
@@ -38,10 +40,8 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     competitor: {
-        fontSize: 28,
+        fontSize: 30,
         fontWeight: '400',
-        borderBottomWidth: 2,
-        borderBottomColor: 'pink',
     },
     firstCompetitor: {
         alignSelf: 'flex-start',

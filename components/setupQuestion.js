@@ -1,29 +1,43 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 
-const SetupQuestion = props => {
-    return (
-        <View style={styles.body}>
-            <Text style={[styles.text, styles.question]}>{props.question}</Text>
-            <TextInput
-                style={[styles.text, styles.field]}
-                editable={true}
-                autoCorrect={false}
-                spellcheck={false}
-                maxLength={32}
-                placeholder={props.field === "game" ? "typey typey" : "county county"}
-                keyboardType={props.field === "game" ? "default" : "number-pad"}
-                onChangeText={(text)=>{props.updateTextInput(text)}}
-                onSubmitEditing={(e) => {
-                    props.handleTextSubmit(e, props.field);
-                }}
-            />
-        </View>
-    );
-};
+export default class SetupQuestion extends Component {
+    constructor(props) {
+        super(props);
+    }
 
-export default SetupQuestion;
+    clearInput() {
+        let inputRef = `${this.props.field}Input`;
+        this.refs[inputRef].clear()
+    }
+    
+    render() {
+        return (
+            <View style={styles.body}>
+                <Text style={[styles.text, styles.question]}>{this.props.question}</Text>
+                <TextInput
+                    ref={`${this.props.field}Input`}
+                    style={[styles.text, styles.field]}
+                    editable={true}
+                    autoCorrect={false}
+                    spellcheck={false}
+                    maxLength={32}
+                    clearTextOnFocus={true}
+                    autoFocus={true}
+                    enablesReturnKeyAutomatically={true}
+                    placeholder={this.props.field === "game" ? "typey typey" : "county county"}
+                    keyboardType={this.props.field === "game" ? "default" : "number-pad"}
+                    onChangeText={(text)=>{this.props.updateTextInput(text)}}
+                    onSubmitEditing={(e) => {
+                        this.props.handleTextSubmit(e, this.props.field);
+                        this.clearInput();
+                    }}
+                />
+            </View>
+        );
+    }
+};
 
 SetupQuestion.propTypes = {
     question: PropTypes.string,
@@ -46,15 +60,19 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     question: {
-        flex: 2,
+        flex: 5,
         fontSize: 24,
         fontWeight: '300',
         alignSelf: 'center',
-        paddingTop: 12,
+        paddingLeft: 12,
+        paddingRight: 12,
+        paddingTop: 24,
+        paddingBottom: 6,
         justifyContent: 'center',
+        textAlign: 'center',
     },
     field: {
-        flex: 5,
+        flex: 7,
         backgroundColor: 'pink',
     },
 });
