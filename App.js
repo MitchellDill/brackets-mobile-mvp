@@ -207,6 +207,7 @@ export default class App extends Component {
               selected={this.state.matchIsSelected}
               matchId={[this.state.roundSelected, this.state.matchSelected]}
               entrants={this.state.bracket[this.state.roundSelected][this.state.matchSelected]}
+              allEntrants={this.state.entrants}
               askWinner={this.askWinner}
               advanceWinner={this.advanceWinner}
               modalVisible={this.state.modalVisible}

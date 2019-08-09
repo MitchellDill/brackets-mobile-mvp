@@ -24,7 +24,7 @@ const Match = props => {
                             <Competitor entrant={props.entrants[0]} corner={0} />
                             {props.entrants[0].victoriesOver.length > 0 ?
                             <Text style={[styles.text, styles.compOne, styles.victoryTitle]}>
-                                {`${props.entrants[0].name}, who vanquished the heinous ${props.entrants[0].victoriesOver[0]}`}
+                                {`${props.entrants[0].name}, who vanquished the heinous ${props.entrants[0].victoriesOver[props.entrants[0].victoriesOver.length - 1]}`}
                             </Text> : null}
                             <Text style={[styles.text, styles.bigVs]}>
                                 VS.
@@ -32,7 +32,7 @@ const Match = props => {
                             <Competitor entrant={props.entrants[1]} corner={1} />
                             {props.entrants[1].victoriesOver.length > 0 ?
                             <Text style={[styles.text, styles.compTwo, styles.victoryTitle]}>
-                                {`${props.entrants[1].name}, who conquered the cruel ${props.entrants[1].victoriesOver[0]}`}
+                                {`${props.entrants[1].name}, who conquered the cruel ${props.entrants[1].victoriesOver[props.entrants[1].victoriesOver.length - 1]}`}
                             </Text> : null}
                     </View>
                     <View style={styles.whoWon}>
@@ -45,7 +45,7 @@ const Match = props => {
                                 <Button title={props.entrants[0].name} color="pink" onPress={() => {
                                     props.advanceWinner(props.entrants[0], props.matchId, props.entrants[1].name)}}/>
                                 <Text style={[styles.text, styles.vs]}>
-                                    VS
+                                    OR
                                 </Text>
                                 <Button title={props.entrants[1].name} color="pink" onPress={() => {
                                     props.advanceWinner(props.entrants[1], props.matchId, props.entrants[0].name)}}/>
@@ -54,14 +54,15 @@ const Match = props => {
                         </Modal>
                         <Button title="who won??????" color="pink" onPress={(visible) => {props.askWinner(true)}} />
                     </View>
-                    <View style={styles.statBlock}>
-                        <Text style={[styles.text, styles.stats]}>
-                            here's an interesting stat!
-                        </Text>
-                    </View>
                     <View style={styles.chatZone}>
                         <Text style={[styles.text, styles.chat]}>
-                            chat chat chat chat chattin that NASTY mess
+                            {`${props.allEntrants[Math.floor(Math.random() * props.allEntrants.length)].name}: i heard that ${props.entrants[1].name} is trash`}
+                        </Text>
+                        <Text style={[styles.text, styles.chat, styles.chat2]}>
+                            {`${props.allEntrants[Math.floor(Math.random() * props.allEntrants.length)].name}: uh how about YOUR trash`}
+                        </Text>
+                        <Text style={[styles.text, styles.chat]}>
+                            {`${props.allEntrants[Math.floor(Math.random() * props.allEntrants.length)].name}: lmao gotem`}
                         </Text>
                     </View>
                 </View>
@@ -74,6 +75,7 @@ const Match = props => {
 export default Match;
 
 Match.propTypes = {
+    allEntrants: PropTypes.arrayOf(PropTypes.object),
     entrants: PropTypes.arrayOf(PropTypes.object),
     selected: PropTypes.bool,
     selectMatch: PropTypes.func,
@@ -105,6 +107,7 @@ const styles = StyleSheet.create({
     chatZone: {
         flex: 7,
         backgroundColor: 'black',
+        alignItems: 'flex-start',
     },
     button: {
         flex: 1,
@@ -137,8 +140,14 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     chat: {
-        textAlign: 'left',
+        alignSelf: 'flex-start',
         padding: 6,
+        color: 'teal',
+    },
+    chat2: {
+        alignSelf: 'flex-end',
+        padding: 6,
+        color: 'lavender',
     },
     vs: {
         fontSize: 18,
@@ -160,10 +169,11 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-end',
     },
     statBlock: {
+        alignItems: 'flex-start',
         justifyContent: 'center',
         paddingBottom: 20,
     },
     stats: {
-        fontSize: 24,
+        fontSize: 18,
     },
 });
