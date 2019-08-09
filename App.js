@@ -96,10 +96,11 @@ export default class App extends Component {
     });
   }
 
-  advanceWinner(winner, matchNo) {
+  advanceWinner(winner, matchNo, loserName = 'some jabroni') {
     let [round, match] = matchNo;
     let corner = (match + 2) % 2;
     winner.wins += 1;
+    winner.victoriesOver.push(loserName);
     if (round === this.state.bracket.length - 1) {
       this.setState({
         tournamentOver: true,
@@ -118,8 +119,8 @@ export default class App extends Component {
     }
   }
 
-  Competitor(name, seed, wins = 0) {
-    return {name, seed, wins};
+  Competitor(name, seed, wins = 0, victoriesOver = []) {
+    return {name, seed, wins, victoriesOver};
   }
 
   buildCompetitors(totalEntrants, entrants) {

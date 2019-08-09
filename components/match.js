@@ -35,17 +35,27 @@ const Match = props => {
                                 </View>
                                 <View style={styles.modalCompetitors}>
                                 <Button title={props.entrants[0].name} color="pink" onPress={() => {
-                                    props.advanceWinner(props.entrants[0], props.matchId)}}/>
+                                    props.advanceWinner(props.entrants[0], props.matchId, props.entrants[1].name)}}/>
                                 <Text style={[styles.text, styles.vs]}>
                                     VS
                                 </Text>
                                 <Button title={props.entrants[1].name} color="pink" onPress={() => {
-                                    props.advanceWinner(props.entrants[1], props.matchId)}}/>
+                                    props.advanceWinner(props.entrants[1], props.matchId, props.entrants[0].name)}}/>
                                 </View>
                             </View>
                         </Modal>
                         <Button title="who won??????" color="pink" onPress={(visible) => {props.askWinner(true)}} />
                     </View>
+                    {props.matchId[0] > 0 ?
+                    <View style={styles.statBlock}>
+                        <Text style={[styles.text, styles.stats]}>
+                            {`${props.entrants[0].name}, who vanquished the heinous ${props.entrants[0].victoriesOver[0]}`}
+                        </Text>
+                        <Text style={[styles.text, styles.stats]}>
+                            {`${props.entrants[1].name}, who conquered the cruel ${props.entrants[1].victoriesOver[0]}`}
+                        </Text>
+                    </View> : null
+                    }
                     <View style={styles.chatZone}>
                         <Text style={[styles.text, styles.chat]}>
                             chat chat chat chat chattin that mess
@@ -133,5 +143,12 @@ const styles = StyleSheet.create({
     bigVs: {
         fontSize: 26,
         fontWeight: '900',
+    },
+    statBlock: {
+        justifyContent: 'center',
+        paddingBottom: 20,
+    },
+    stats: {
+        fontSize: 26,
     },
 });
