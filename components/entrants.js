@@ -32,11 +32,14 @@ export default class Entrants extends Component {
         return (
             <View style={styles.fieldsContainer}>
                 <Text style={[styles.text, styles.question]}>{this.props.question}</Text>
-                {[...Array(this.props.totalEntrants).keys()].fill(true).map((entrant, i) => {
+                {[...Array(this.props.totalEntrants - this.state.entrants.length).keys()].fill(true).map((entrant, i) => {
                 return  <TextInput
                           style={[styles.text, styles.field]}
                           editable={true}
-                          placeholder={`entrant #${i}`}
+                          autoCorrect={false}
+                          spellcheck={false}
+                          maxLength={32}
+                          placeholder={`entrant #${i + 1}`}
                           onChangeText={(text)=>{this.updateTextInput(text);}}
                           onSubmitEditing={(e) => {this.handleEntrantSubmit(e);}}
                           key={`entrantInput${i}`}

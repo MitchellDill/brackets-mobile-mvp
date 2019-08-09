@@ -31,6 +31,8 @@ const styles = StyleSheet.create({
         backgroundColor: 'pink',
         justifyContent: 'center',
         borderRadius: 7,
+        paddingLeft: 6,
+        paddingRight:6,
       },
     text: {
         fontSize: 22,
@@ -43,10 +45,10 @@ const styles = StyleSheet.create({
     },
     firstCompetitor: {
         alignSelf: 'flex-start',
-        paddingLeft: 5,
+        marginLeft: 5,
     },
     secondCompetitor: {
         alignSelf: 'flex-end',
-        paddingRight: 5,
+        marginRight: 5,
     },
 });

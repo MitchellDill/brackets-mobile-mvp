@@ -30,7 +30,7 @@ Round.propTypes = {
 
 const styles = StyleSheet.create({
     body: {
-        backgroundColor: 'purple',
+        backgroundColor: 'black',
         justifyContent: 'center',
         flex: 1,
       },

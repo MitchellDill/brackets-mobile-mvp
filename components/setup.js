@@ -29,7 +29,7 @@ Setup.propTypes = {
 
 const styles = StyleSheet.create({
     body: {
-      backgroundColor: 'purple',
+      backgroundColor: 'black',
       flex: 1,
     },
     text: {

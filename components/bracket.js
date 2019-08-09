@@ -36,7 +36,7 @@ Bracket.propTypes = {
 
 const styles = StyleSheet.create({
     body: {
-        backgroundColor: 'purple',
+        backgroundColor: 'black',
         flex: 1,
       },
     bracket: {
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     },
     scrollContainer: {
         flexDirection: 'row',
-        width: '180%',
+        width: '160%',
     },
     text: {
           fontSize: 28,

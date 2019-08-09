@@ -9,7 +9,11 @@ const SetupQuestion = props => {
             <TextInput
                 style={[styles.text, styles.field]}
                 editable={true}
+                autoCorrect={false}
+                spellcheck={false}
+                maxLength={32}
                 placeholder={props.field === "game" ? "typey typey" : "county county"}
+                keyboardType={props.field === "game" ? "default" : "number-pad"}
                 onChangeText={(text)=>{props.updateTextInput(text)}}
                 onSubmitEditing={(e) => {props.handleTextSubmit(e, props.field)}}
             />
@@ -32,6 +36,7 @@ const styles = StyleSheet.create({
       backgroundColor: 'purple',
       flex: 1,
       textAlign: 'center',
+      justifyContent: 'center',
     },
     text: {
         fontSize: 28,
@@ -43,6 +48,8 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontWeight: '300',
         alignSelf: 'center',
+        paddingTop: 12,
+        justifyContent: 'center',
     },
     field: {
         flex: 5,

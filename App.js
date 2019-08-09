@@ -64,6 +64,7 @@ export default class App extends Component {
       text = Number(text);
     }
     this.recordSetup(field, text);
+    this.setState({text: ''});
   }
 
   recordSetup(field, text) {
@@ -106,6 +107,7 @@ export default class App extends Component {
   advanceWinner(winner, matchNo) {
     let [round, match] = matchNo;
     let corner = (match + 2) % 2;
+    winner.wins += 1;
     if (round === this.state.bracket.length - 1) {
       this.setState({
         tournamentOver: true,
@@ -117,7 +119,6 @@ export default class App extends Component {
       let bracketUpdate = this.state.bracket.slice();
       let nextMatch = bracketUpdate[round + 1][Math.floor(match / 2)];
       nextMatch[corner] = winner;
-      winner.wins += 1;
       this.setState({
         bracket: bracketUpdate,
       });
