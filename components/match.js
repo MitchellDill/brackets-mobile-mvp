@@ -22,10 +22,18 @@ const Match = props => {
                 <View style={styles.matchScreen}>
                     <View style={styles.competitors}>
                             <Competitor entrant={props.entrants[0]} corner={0} />
+                            {props.entrants[0].victoriesOver.length > 0 ?
+                            <Text style={[styles.text, styles.compOne, styles.victoryTitle]}>
+                                {`${props.entrants[0].name}, who vanquished the heinous ${props.entrants[0].victoriesOver[0]}`}
+                            </Text> : null}
                             <Text style={[styles.text, styles.bigVs]}>
                                 VS.
                             </Text>
                             <Competitor entrant={props.entrants[1]} corner={1} />
+                            {props.entrants[1].victoriesOver.length > 0 ?
+                            <Text style={[styles.text, styles.compTwo, styles.victoryTitle]}>
+                                {`${props.entrants[1].name}, who conquered the cruel ${props.entrants[1].victoriesOver[0]}`}
+                            </Text> : null}
                     </View>
                     <View style={styles.whoWon}>
                         <Modal visible={props.modalVisible} transparent={false} animationType="fade" presentationStyle="formSheet">
@@ -46,16 +54,11 @@ const Match = props => {
                         </Modal>
                         <Button title="who won??????" color="pink" onPress={(visible) => {props.askWinner(true)}} />
                     </View>
-                    {props.matchId[0] > 0 ?
                     <View style={styles.statBlock}>
                         <Text style={[styles.text, styles.stats]}>
-                            {`${props.entrants[0].name}, who vanquished the heinous ${props.entrants[0].victoriesOver[0]}`}
+                            most turtles: 7
                         </Text>
-                        <Text style={[styles.text, styles.stats]}>
-                            {`${props.entrants[1].name}, who conquered the cruel ${props.entrants[1].victoriesOver[0]}`}
-                        </Text>
-                    </View> : null
-                    }
+                    </View>
                     <View style={styles.chatZone}>
                         <Text style={[styles.text, styles.chat]}>
                             chat chat chat chat chattin that mess
@@ -94,7 +97,7 @@ const styles = StyleSheet.create({
         alignItems: 'flex-start',
     },
     competitors: {
-        flex: 2,
+        flex: 3,
         alignSelf: 'stretch',
         justifyContent: 'space-between',
         paddingBottom: 12,
@@ -126,6 +129,7 @@ const styles = StyleSheet.create({
         alignSelf: 'stretch',
         justifyContent: 'space-around',
         paddingBottom: 12,
+        fontSize: 28,
     },
     text: {
         fontSize: 20,
@@ -141,14 +145,25 @@ const styles = StyleSheet.create({
         fontWeight: '800',
     },
     bigVs: {
-        fontSize: 26,
+        fontSize: 22,
         fontWeight: '900',
+        alignSelf: 'center',
+    },
+    victoryTitle: {
+        fontSize: 12,
+        fontWeight: '200',
+    },
+    compOne: {
+        alignSelf: "flex-start",
+    },
+    compTwo: {
+        alignSelf: 'flex-end',
     },
     statBlock: {
         justifyContent: 'center',
         paddingBottom: 20,
     },
     stats: {
-        fontSize: 26,
+        fontSize: 24,
     },
 });

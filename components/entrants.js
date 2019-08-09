@@ -46,6 +46,16 @@ export default class Entrants extends Component {
         return (
             <View style={styles.fieldsContainer}>
                 <Text style={[styles.text, styles.question]}>{this.props.question}</Text>
+                <View style={[styles.text, styles.entrants]}>
+                {this.state.entrants ? this.state.entrants.map((entrant, i) => {
+                    return <Text
+                              style={[styles.text, styles.newName]}
+                              key={`entrantName${i}`}
+                            >
+                            {entrant}
+                            </Text>;
+                }) : null}
+                </View>
                 {this.state.currentEntrant <= this.props.totalEntrants ?
                   <TextInput
                           ref={`entrant${this.state.currentEntrant}`}
@@ -83,13 +93,26 @@ const styles = StyleSheet.create({
         backgroundColor: 'pink',
     },
     fieldsContainer: {
-        flex: 10,
+        flex: 7,
         justifyContent: 'space-around',
     },
     question: {
-        flex: 1,
+        flex: 2,
         fontSize: 24,
         fontWeight: '300',
         alignSelf: 'center',
+        paddingLeft: 12,
+        paddingRight: 12,
+        paddingTop: 24,
+        paddingBottom: 6,
+        justifyContent: 'center',
+        textAlign: 'center',
     },
+    newName: {
+        color: 'teal',
+    },
+    entrants: {
+        flex: 3,
+        justifyContent: 'center',
+    }
 });

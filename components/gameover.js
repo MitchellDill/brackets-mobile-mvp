@@ -13,6 +13,11 @@ const Gameover = props => {
                 </View>
                 <View style={styles.statBlock}>
                     <Text style={[styles.text, styles.stats]}>WINS: {props.winner.wins}</Text>
+                    <Text style={[styles.text, styles.stats, styles.victories]}>personally saw to the misfortune of
+                    {props.winner.victoriesOver.map((foe, i, foes) => {
+                       return i < foes.lenth - 1 ? ` ${foe} and` : ` ${foe}`;
+                    })}
+                    </Text>
                 </View>
             </View>
         </Fragment>
@@ -51,5 +56,10 @@ const styles = StyleSheet.create({
     },
     stats: {
         fontSize: 26,
+    },
+    victories: {
+        paddingTop: 12,
+        fontSize: 22,
+        justifyContent: 'center',
     },
 });

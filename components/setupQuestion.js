@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, StyleSheet } from 'react-native';
+import { View, Text, TextInput, StyleSheet, KeyboardAvoidingView } from 'react-native';
 import PropTypes from 'prop-types';
 
 export default class SetupQuestion extends Component {
@@ -14,7 +14,7 @@ export default class SetupQuestion extends Component {
     
     render() {
         return (
-            <View style={styles.body}>
+            <KeyboardAvoidingView style={styles.body} behavior="padding" enabled>
                 <Text style={[styles.text, styles.question]}>{this.props.question}</Text>
                 <TextInput
                     ref={`${this.props.field}Input`}
@@ -27,14 +27,14 @@ export default class SetupQuestion extends Component {
                     autoFocus={true}
                     enablesReturnKeyAutomatically={true}
                     placeholder={this.props.field === "game" ? "typey typey" : "county county"}
-                    keyboardType={this.props.field === "game" ? "default" : "number-pad"}
+                    keyboardType={this.props.field === "game" ? "default" : "numeric"}
                     onChangeText={(text)=>{this.props.updateTextInput(text)}}
                     onSubmitEditing={(e) => {
                         this.props.handleTextSubmit(e, this.props.field);
                         this.clearInput();
                     }}
                 />
-            </View>
+            </KeyboardAvoidingView>
         );
     }
 };
