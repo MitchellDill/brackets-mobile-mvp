@@ -7,10 +7,28 @@ import Entrants from './entrants.js';
 const Setup = props => {
     return (
         <View style={styles.body}>
-            <Text style={[styles.text, styles.title]}>{'['}brackets{']'}</Text>
-            {props.totalEntrants > 1 ? <Entrants question="enter all y'all's names in, if you please." totalEntrants={props.totalEntrants} finalizeEntrants={props.finalizeEntrants} />
-            : props.game ? <SetupQuestion question="how many of y'all are gettin in on this?" field="totalEntrants" handleTextSubmit={props.handleTextSubmit} updateTextInput={props.updateTextInput} />
-            : <SetupQuestion question="whatchu playin, partner?" field="game" handleTextSubmit={props.handleTextSubmit} updateTextInput={props.updateTextInput} />
+            <Text style={[styles.text, styles.title]}>
+              {'['}brackets{']'}
+            </Text>
+            {props.totalEntrants > 1 ?
+              <Entrants
+                question="enter all y'all's names in, if you please."
+                totalEntrants={props.totalEntrants}
+                finalizeEntrants={props.finalizeEntrants}
+              />
+            : props.game ?
+              <SetupQuestion
+                question="how many of y'all are gettin in on this?"
+                field="totalEntrants"
+                handleTextSubmit={props.handleTextSubmit}
+                updateTextInput={props.updateTextInput} 
+              />
+            : <SetupQuestion
+                question="whatchu playin, partner?"
+                field="game" 
+                handleTextSubmit={props.handleTextSubmit} 
+                updateTextInput={props.updateTextInput}
+              />
             }
         </View>
     );

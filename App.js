@@ -4,14 +4,7 @@
  */
 
 import React, {Component, Fragment} from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  View,
-  Text,
-  Modal,
-  StatusBar,
-} from 'react-native';
+import {SafeAreaView, StyleSheet, StatusBar} from 'react-native';
 
 import Setup from './components/setup.js';
 import Bracket from './components/bracket.js';

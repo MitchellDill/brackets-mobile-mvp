@@ -24,15 +24,21 @@ export default class Entrants extends Component {
         let entrant = e.nativeEvent.text;
         let updatedEntrants = this.state.entrants.slice();
         updatedEntrants.push(entrant);
-        this.setState({entrants: updatedEntrants});
-        updatedEntrants.length === this.props.totalEntrants ? this.props.finalizeEntrants(updatedEntrants) : null;
+        this.setState({
+            entrants: updatedEntrants
+        });
+        updatedEntrants.length === this.props.totalEntrants ?
+          this.props.finalizeEntrants(updatedEntrants)
+          : null;
     }
 
     render() {
         return (
             <View style={styles.fieldsContainer}>
                 <Text style={[styles.text, styles.question]}>{this.props.question}</Text>
-                {[...Array(this.props.totalEntrants - this.state.entrants.length).keys()].fill(true).map((entrant, i) => {
+                {[...Array(this.props.totalEntrants - this.state.entrants.length).keys()]
+                  .fill(true)
+                  .map((entrant, i) => {
                 return  <TextInput
                           style={[styles.text, styles.field]}
                           editable={true}
@@ -44,7 +50,7 @@ export default class Entrants extends Component {
                           onSubmitEditing={(e) => {this.handleEntrantSubmit(e);}}
                           key={`entrantInput${i}`}
                         />;
-                })}
+                  })}
             </View>
 
         )

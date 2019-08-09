@@ -28,9 +28,7 @@ Competitor.propTypes = {
 const styles = StyleSheet.create({
     body: {
         flex: 1,
-        backgroundColor: 'pink',
         justifyContent: 'center',
-        borderRadius: 7,
         paddingLeft: 6,
         paddingRight:6,
       },

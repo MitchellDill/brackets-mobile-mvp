@@ -8,10 +8,10 @@ const Match = props => {
         <Fragment>
         {props.selected === false ?
             <View style={styles.body}>
-                <Button title={props.entrants[0].name} color="pink" onPress={(matchId) => {
+                <Button title={`[${props.entrants[0].name}]`} color="pink" onPress={(matchId) => {
                     props.selectMatch(props.matchId)}}/>
                     <Text style={[styles.text, styles.vs]}>VS</Text>
-                <Button title={props.entrants[1].name} color="pink" onPress={(matchId) => {
+                <Button title={`[${props.entrants[1].name}`} color="pink" onPress={(matchId) => {
                     props.selectMatch(props.matchId)}}/>
             </View>
             : (
@@ -22,7 +22,9 @@ const Match = props => {
                 <View style={styles.matchScreen}>
                     <View style={styles.competitors}>
                             <Competitor entrant={props.entrants[0]} corner={0} />
-                            <Text style={[styles.text, styles.bigVs]}>VS.</Text>
+                            <Text style={[styles.text, styles.bigVs]}>
+                                VS.
+                            </Text>
                             <Competitor entrant={props.entrants[1]} corner={1} />
                     </View>
                     <View style={styles.whoWon}>
@@ -34,7 +36,9 @@ const Match = props => {
                                 <View style={styles.modalCompetitors}>
                                 <Button title={props.entrants[0].name} color="pink" onPress={() => {
                                     props.advanceWinner(props.entrants[0], props.matchId)}}/>
-                                <Text style={[styles.text, styles.vs]}>VS</Text>
+                                <Text style={[styles.text, styles.vs]}>
+                                    VS
+                                </Text>
                                 <Button title={props.entrants[1].name} color="pink" onPress={() => {
                                     props.advanceWinner(props.entrants[1], props.matchId)}}/>
                                 </View>
@@ -43,7 +47,9 @@ const Match = props => {
                         <Button title="Who won??????" color="red" onPress={(visible) => {props.askWinner(true)}} />
                     </View>
                     <View style={styles.chatZone}>
-                        <Text style={[styles.text, styles.chat]}>chat chat chat chat chattin that mess</Text>
+                        <Text style={[styles.text, styles.chat]}>
+                            chat chat chat chat chattin that mess
+                        </Text>
                     </View>
                 </View>
             </View>
