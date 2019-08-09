@@ -24,7 +24,6 @@ export default class Entrants extends Component {
         let entrant = e.nativeEvent.text;
         let updatedEntrants = this.state.entrants.slice();
         updatedEntrants.push(entrant);
-        console.log(entrant);
         this.setState({entrants: updatedEntrants});
         updatedEntrants.length === this.props.totalEntrants ? this.props.finalizeEntrants(updatedEntrants) : null;
     }
@@ -33,15 +32,15 @@ export default class Entrants extends Component {
         return (
             <View style={styles.fieldsContainer}>
                 <Text style={[styles.text, styles.question]}>{this.props.question}</Text>
-                {[...Array(this.props.totalEntrants).keys()].fill(true).map(entrant => {
+                {[...Array(this.props.totalEntrants).keys()].fill(true).map((entrant, i) => {
                 return  <TextInput
                           style={[styles.text, styles.field]}
                           editable={true}
+                          placeholder={`entrant #${i}`}
                           onChangeText={(text)=>{this.updateTextInput(text);}}
                           onSubmitEditing={(e) => {this.handleEntrantSubmit(e);}}
-                          >
-                          ...
-                        </TextInput>;
+                          key={`entrantInput${i}`}
+                        />;
                 })}
             </View>
 
@@ -56,25 +55,21 @@ Entrants.propTypes = {
 };
 
 const styles = StyleSheet.create({
-    body: {
-      backgroundColor: 'purple',
-      flex: 1,
-    },
     text: {
         fontSize: 28,
         color:'white',
         textAlign: 'center',
     },
     field: {
-        flex: 2,
+        flex: 1,
         backgroundColor: 'pink',
     },
     fieldsContainer: {
-        flex: 1,
+        flex: 10,
         justifyContent: 'space-around',
     },
     question: {
-        flex: 2,
+        flex: 1,
         fontSize: 24,
         fontWeight: '300',
         alignSelf: 'center',

@@ -9,11 +9,10 @@ const SetupQuestion = props => {
             <TextInput
                 style={[styles.text, styles.field]}
                 editable={true}
+                placeholder={props.field === "game" ? "typey typey" : "county county"}
                 onChangeText={(text)=>{props.updateTextInput(text)}}
                 onSubmitEditing={(e) => {props.handleTextSubmit(e, props.field)}}
-                >
-                ...
-              </TextInput>
+            />
         </View>
     );
 };
@@ -32,6 +31,7 @@ const styles = StyleSheet.create({
     body: {
       backgroundColor: 'purple',
       flex: 1,
+      textAlign: 'center',
     },
     text: {
         fontSize: 28,
