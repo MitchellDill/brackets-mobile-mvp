@@ -56,5 +56,6 @@ const styles = StyleSheet.create({
           fontSize: 38,
           fontWeight: '600',
           paddingTop: 5,
+          color: 'pink',
       },
 });

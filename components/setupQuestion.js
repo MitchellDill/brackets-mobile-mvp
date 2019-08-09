@@ -15,7 +15,9 @@ const SetupQuestion = props => {
                 placeholder={props.field === "game" ? "typey typey" : "county county"}
                 keyboardType={props.field === "game" ? "default" : "number-pad"}
                 onChangeText={(text)=>{props.updateTextInput(text)}}
-                onSubmitEditing={(e) => {props.handleTextSubmit(e, props.field)}}
+                onSubmitEditing={(e) => {
+                    props.handleTextSubmit(e, props.field);
+                }}
             />
         </View>
     );

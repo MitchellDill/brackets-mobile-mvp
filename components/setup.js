@@ -31,6 +31,8 @@ const styles = StyleSheet.create({
     body: {
       backgroundColor: 'black',
       flex: 1,
+      justifyContent: 'center',
+      textAlign: 'center',
     },
     text: {
         fontSize: 28,

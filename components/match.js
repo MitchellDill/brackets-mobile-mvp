@@ -68,7 +68,7 @@ Match.propTypes = {
 const styles = StyleSheet.create({
     body: {
         flex: 1,
-        backgroundColor: 'purple',
+        backgroundColor: 'black',
         justifyContent: 'center',
         alignItems: 'center',
       },

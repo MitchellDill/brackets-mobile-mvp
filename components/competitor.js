@@ -42,6 +42,8 @@ const styles = StyleSheet.create({
     competitor: {
         fontSize: 28,
         fontWeight: '400',
+        borderBottomWidth: 2,
+        borderBottomColor: 'pink',
     },
     firstCompetitor: {
         alignSelf: 'flex-start',

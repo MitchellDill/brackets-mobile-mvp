@@ -64,7 +64,6 @@ export default class App extends Component {
       text = Number(text);
     }
     this.recordSetup(field, text);
-    this.setState({text: ''});
   }
 
   recordSetup(field, text) {
