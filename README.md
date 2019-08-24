@@ -2,7 +2,11 @@
 
 *brackets* is the product of a 2-day MVP sprint to create a mobile, sport-and-game-agnostic tournament bracketing application, undertaken for the purposes of learning React Native development.
 
+<img src="https://i.imgur.com/FActD9b.png" width="200" />
+
 # MVP Feature List:
+
+<img src="https://i.imgur.com/dM1l5Rz.png" width="200" />
 
 - Enter pool of competitors, high seed to low seed, and receive an organized and persistent tournament structure
 - Default to a single-knockout structure, with a losers' bracket
@@ -11,6 +15,8 @@
 - Name and game are entered for each tournament and used to track it
 - Custom Tttles generated to celebrate each player's most recent victory
 - Mocked chat window for each individual match
+
+<img src="https://i.imgur.com/afjjjga.png" width="200" />
 
 # Future Functionality
 
